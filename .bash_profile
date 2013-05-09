@@ -15,7 +15,7 @@ export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin:$PAT
 
 # some aliases
 alias ll="ls -l"
-alias ls="ls -la"
+alias la="ls -la"
 
 # Shortcut for `bundle exec rails` and `bundle exec rake`.
 # If script/rails and script/rake are available, use them instead as they are much
