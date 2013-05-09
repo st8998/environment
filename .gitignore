@@ -1,0 +1,7 @@
+.idea
+
+box/cookbooks
+box/tmp
+box/.vagrant
+
+maid/maid.log

@@ -1,0 +1,74 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant::Config.run do |config|
+
+  config.vm.box = 'box-precise-64'
+
+  config.vm.customize ["modifyvm", :id, "--memory", 512]
+
+  # Forward a port from the guest to the host, which allows for outside
+  # computers to access the VM, whereas host only networking does not.
+  config.vm.forward_port 5432, 5432
+  config.vm.forward_port 6379, 6379
+
+  # Enable provisioning with chef solo, specifying a cookbooks path, roles
+  # path, and data_bags path (all relative to this Vagrantfile), and adding
+  # some recipes and/or roles.
+  config.vm.provision :chef_solo do |chef|
+
+    chef.cookbooks_path = './cookbooks'
+
+    chef.add_recipe 'apt'
+    chef.add_recipe 'sysctl'
+
+    chef.add_recipe 'postgresql::server'
+    chef.add_recipe 'postgresql::config_pgtune'
+    chef.add_recipe 'redis::source'
+
+    # You may also specify custom JSON attributes:
+    chef.json = {
+        sysctl: {
+            params: {
+                kernel: {
+                    # this value was picked up from postgresql start error message
+                    shmmax: '137986048'
+                }
+            }
+        },
+
+        redis: {
+            source: {version: '2.4.1'}
+        },
+
+        postgresql: {
+            enable_pitti_ppa: true,
+            server: {
+                packages: ['postgresql-9.2', 'postgresql-contrib-9.2']
+            },
+
+            version: '9.2',
+
+            password: {
+                postgres: ''
+            },
+            config: {
+                listen_addresses: '*',
+                port: 5432,
+                ssl: false
+            },
+            pg_hba: [{
+                         type: 'host',
+                         db: 'all',
+                         user: 'all',
+                         addr: '0.0.0.0/0',
+                         method: 'trust'
+                     }],
+            pg_tune: {
+                db_type: 'web',
+                max_connections: 20
+            }
+        }
+    }
+  end
+end

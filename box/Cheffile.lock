@@ -1,0 +1,25 @@
+SITE
+  remote: http://community.opscode.com/api/v1
+  specs:
+    apt (1.9.2)
+    build-essential (1.4.0)
+    openssl (1.0.2)
+    postgresql (2.4.0)
+      apt (>= 0.0.0)
+      build-essential (>= 0.0.0)
+      openssl (>= 0.0.0)
+    sysctl (0.3.1)
+
+GIT
+  remote: https://github.com/ctrabold/chef-redis.git
+  ref: master
+  sha: e3a89f34d0f5b81867ae9e07a9404ac89e1ff61c
+  specs:
+    redis (0.0.4)
+
+DEPENDENCIES
+  apt (>= 0)
+  postgresql (>= 0)
+  redis (>= 0)
+  sysctl (>= 0)
+
