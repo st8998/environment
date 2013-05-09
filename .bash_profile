@@ -9,7 +9,8 @@ export HISTCONTROL=ignoreboth
 export HISTSIZE=10000
 
 # prompt
-export PS1='\[`echo -n -e "\033]0;${PWD##*/}\007"`\]\W> '
+# all prompt should be placed inside \[ \] brackets
+export PS1='\[\e[1;32m`echo -n -e "\033]0;${PWD##*/}\007"`\W\e[m\]> '
 
 export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin:$PATH
 
