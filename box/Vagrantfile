@@ -3,6 +3,7 @@
 
 Vagrant::Config.run do |config|
 
+  # https://mega.co.nz/#!EUNDmKzA!KDLgiXW81JEIgsZA47v_-WlPvwpJ3epADkiMIeppjF4
   config.vm.box = 'box-precise-64'
 
   config.vm.customize ["modifyvm", :id, "--memory", 512]
