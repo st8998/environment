@@ -18,6 +18,52 @@ export PATH=/usr/local/bin:/usr/local/share/python:/usr/local/share/npm/bin:$PAT
 alias ll="ls -l"
 alias la="ls -la"
 
+# Extract an archive of any type
+extract(){
+   if [ $# -lt 1 ]
+   then
+       echo Usage: extract file
+       return 1
+   fi
+   if [ -f $1 ] ; then
+       case $1 in
+           *.tar.bz2)   tar xvjf $1    ;;
+           *.tar.gz)    tar xvzf $1    ;;
+           *.bz2)       bunzip2 $1     ;;
+           *.rar)       unrar x $1     ;;
+           *.gz)        gunzip $1      ;;
+           *.tar)       tar xvf $1     ;;
+           *.tbz2)      tar xvjf $1    ;;
+           *.tgz)       tar xvzf $1    ;;
+           *.zip)       unzip $1       ;;
+           *.war|*.jar) unzip $1       ;;
+           *.Z)         uncompress $1  ;;
+           *.7z)        7z x $1        ;;
+           *)           echo "don't know how to extract '$1'..." ;;
+       esac
+   else
+       echo "'$1' is not a valid file!"
+   fi
+}
+
+# Creates an archive
+roll(){
+  if [ "$#" -ne 0 ] ; then
+    FILE="$1"
+    case "$FILE" in
+      *.tar.bz2|*.tbz2) shift && tar cvjf "$FILE" $* ;;
+      *.tar.gz|*.tgz)   shift && tar cvzf "$FILE" $* ;;
+      *.tar)            shift && tar cvf "$FILE" $* ;;
+      *.zip)            shift && zip "$FILE" $* ;;
+      *.rar)            shift && rar "$FILE" $* ;;
+      *.7z)             shift && 7zr a "$FILE" $* ;;
+      *)                echo "'$1' cannot be rolled via roll()" ;;
+    esac
+  else
+    echo "usage: roll [file] [contents]"
+  fi
+}
+
 # Shortcut for `bundle exec rails` and `bundle exec rake`.
 # If script/rails and script/rake are available, use them instead as they are much
 # faster to execute than `bundle exec`.
