@@ -37,7 +37,7 @@ Maid.rules do
 
   rule 'Really old downloads' do
     dir('~/Downloads/*').each do |path|
-      trash(path) if 1.weeks.since?(accessed_at(path))
+      trash(path) if 2.days.since?(accessed_at(path))
     end
   end
 end
