@@ -39,7 +39,7 @@ if defined? ActiveRecord
         order('random()')
       end
 
-      def find_random
+      def sample
         random.first
       end
     end
