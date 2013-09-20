@@ -94,6 +94,9 @@ function cd {
   fi
 }
 
+# bundle exec alias
+alias be="bundle exec"
+
 # autojump
 [[ -s `brew --prefix`/etc/autojump.sh ]] && . `brew --prefix`/etc/autojump.sh
 
