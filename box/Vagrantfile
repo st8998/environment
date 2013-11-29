@@ -6,12 +6,13 @@ Vagrant::Config.run do |config|
   # https://mega.co.nz/#!EUNDmKzA!KDLgiXW81JEIgsZA47v_-WlPvwpJ3epADkiMIeppjF4
   config.vm.box = 'box-precise-64'
 
-  config.vm.customize ['modifyvm', :id, '--memory', 384]
+  config.vm.customize ['modifyvm', :id, '--memory', 1024]
 
   # Forward a port from the guest to the host, which allows for outside
   # computers to access the VM, whereas host only networking does not.
   config.vm.forward_port 5432, 5432
   config.vm.forward_port 6379, 6379
+  config.vm.forward_port 9200, 9200
 
   # Enable provisioning with chef solo, specifying a cookbooks path, roles
   # path, and data_bags path (all relative to this Vagrantfile), and adding
@@ -21,11 +22,14 @@ Vagrant::Config.run do |config|
     chef.cookbooks_path = './cookbooks'
 
     chef.add_recipe 'apt'
+    chef.add_recipe 'java'
     chef.add_recipe 'sysctl'
 
     chef.add_recipe 'postgresql::server'
     chef.add_recipe 'postgresql::config_pgtune'
     chef.add_recipe 'redis::source'
+
+    chef.add_recipe 'elasticsearch'
 
     # You may also specify custom JSON attributes:
     chef.json = {
@@ -33,7 +37,7 @@ Vagrant::Config.run do |config|
             params: {
                 kernel: {
                     # this value was picked up from postgresql start error message
-                    shmmax: '137986048'
+                    shmmax: '270614528'
                 }
             }
         },
@@ -41,6 +45,9 @@ Vagrant::Config.run do |config|
         redis: {
             source: {version: '2.4.1'},
             bind: '0.0.0.0'
+        },
+
+        elasticsearch: {
         },
 
         postgresql: {
@@ -68,7 +75,8 @@ Vagrant::Config.run do |config|
                      }],
             pg_tune: {
                 db_type: 'web',
-                max_connections: 20
+                max_connections: 20,
+                total_memory: '395264kB'
             }
         }
     }

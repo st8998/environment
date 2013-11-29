@@ -5,13 +5,8 @@ def add_gem_to_load_path gem_name
   end
 end
 
-add_gem_to_load_path('map_by_method')
-
 # just tab complition in irb
 require 'irb/completion'
-
-# http://drnicwilliams.com/category/ruby/gems/map_by_method/
-require 'map_by_method'
 
 # multiline indentation
 IRB.conf[:AUTO_INDENT]=true

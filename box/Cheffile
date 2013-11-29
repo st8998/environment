@@ -6,7 +6,9 @@ site 'http://community.opscode.com/api/v1'
 # cookbook 'chef-client'
 
 cookbook 'apt'
+cookbook 'java'
 cookbook 'postgresql'
 cookbook 'redis', git: 'https://github.com/ctrabold/chef-redis.git'
 cookbook 'sysctl'
 
+cookbook 'elasticsearch'

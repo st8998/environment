@@ -2,13 +2,23 @@ SITE
   remote: http://community.opscode.com/api/v1
   specs:
     apt (1.9.2)
+    ark (0.4.0)
+    aws (1.0.0)
     build-essential (1.4.0)
+    chef_handler (1.1.4)
+    elasticsearch (0.3.7)
+      ark (>= 0.0.0)
+    java (1.15.4)
+      aws (>= 0.0.0)
+      windows (>= 0.0.0)
     openssl (1.0.2)
     postgresql (2.4.0)
       apt (>= 0.0.0)
       build-essential (>= 0.0.0)
       openssl (>= 0.0.0)
     sysctl (0.3.1)
+    windows (1.11.0)
+      chef_handler (>= 0.0.0)
 
 GIT
   remote: https://github.com/ctrabold/chef-redis.git
@@ -19,6 +29,8 @@ GIT
 
 DEPENDENCIES
   apt (>= 0)
+  elasticsearch (>= 0)
+  java (>= 0)
   postgresql (>= 0)
   redis (>= 0)
   sysctl (>= 0)
