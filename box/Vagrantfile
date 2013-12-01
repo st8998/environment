@@ -48,6 +48,7 @@ Vagrant::Config.run do |config|
         },
 
         elasticsearch: {
+            allocated_memory: '384m'
         },
 
         postgresql: {
