@@ -1,9 +1,9 @@
 eval "$(rbenv init -)"
 
 # ruby GC limits expanded
-export RUBY_GC_MALLOC_LIMIT=1000000000
-export RUBY_FREE_MIN=500000
-export RUBY_HEAP_MIN_SLOTS=40000
+# export RUBY_GC_MALLOC_LIMIT=1000000000
+# export RUBY_FREE_MIN=500000
+# export RUBY_HEAP_MIN_SLOTS=40000
 
 export HISTCONTROL=ignoreboth
 export HISTSIZE=10000
@@ -72,13 +72,13 @@ function r() {
     if [ -x script/rails ]; then
       script/rails $@
     else
-      bundle exec rails $@
+      bundle exec bin/rails $@
     fi
   else
     if [ -x script/rake ]; then
       script/rake $@
     else
-      bundle exec rake $@
+      bundle exec bin/rake $@
     fi
   fi
 }

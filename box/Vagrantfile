@@ -22,14 +22,14 @@ Vagrant::Config.run do |config|
     chef.cookbooks_path = './cookbooks'
 
     chef.add_recipe 'apt'
-    chef.add_recipe 'java'
     chef.add_recipe 'sysctl'
 
     chef.add_recipe 'postgresql::server'
     chef.add_recipe 'postgresql::config_pgtune'
     chef.add_recipe 'redis::source'
 
-    chef.add_recipe 'elasticsearch'
+    #chef.add_recipe 'java'
+    #chef.add_recipe 'elasticsearch'
 
     # You may also specify custom JSON attributes:
     chef.json = {
@@ -52,12 +52,13 @@ Vagrant::Config.run do |config|
         },
 
         postgresql: {
-            enable_pitti_ppa: true,
+            enable_pgdg_apt: true,
+            initdb_locale: ['en_EN.utf8'],
             server: {
-                packages: ['postgresql-9.2', 'postgresql-contrib-9.2']
+                packages: ['postgresql-9.3', 'postgresql-contrib-9.3']
             },
 
-            version: '9.2',
+            version: '9.3',
 
             password: {
                 postgres: ''
