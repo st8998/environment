@@ -12,7 +12,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
   config.vm.box = "precise64"
 
-  config.vm.network :forwarded_port, guest: 5432, host: 5432
+  config.vm.network :forwarded_port, guest: 5432, host: 5432 # postgresql
+  config.vm.network :forwarded_port, guest: 6379, host: 6379 # redis
 
   # If true, then any SSH connections made will enable agent forwarding.
   # Default value: false

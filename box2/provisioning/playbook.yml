@@ -14,6 +14,7 @@
         type: web
         total_memory: 395264000
         max_connections: 20
+    - include: redis.yml
 
   handlers:
     - name: restart postgresql

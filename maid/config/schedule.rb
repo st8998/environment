@@ -1,3 +1,3 @@
 every :hour do
-  command 'maid clean -r ~/.environment/maid/rules.rb --silent'
+  command 'maid clean -r ~/.environment/maid/rules.rb --silent --force'
 end
